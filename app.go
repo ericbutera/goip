@@ -18,9 +18,6 @@ type IPs []IP
 var ips IPs
 
 func main() {
-	ip := IP{"127.0.0.1", time.Now()}
-	ips = append(ips, ip)
-
 	r := mux.NewRouter()
 	r.HandleFunc("/", Index)
 	r.HandleFunc("/add", Add)
@@ -38,7 +35,7 @@ func main() {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "hi")
+	fmt.Fprintln(w, "Last 5 ips:\n")
 	for _, ip := range ips {
 		var str = fmt.Sprintf("ip: %v time: %v", ip.Ip, ip.Updated)
 		fmt.Fprintln(w, str)
